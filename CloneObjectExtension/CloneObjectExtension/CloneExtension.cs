@@ -13,13 +13,13 @@ namespace CloneObjectExtension
         {
             Type typeSource = objSource.GetType();
             object objTarget = Activator.CreateInstance(typeSource);
-            const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
-            PropertyInfo[] propertyInfo = typeSource.GetProperties(flags);
+            const BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            PropertyInfo[] propertyInfo = typeSource.GetProperties(bindingFlags);
             foreach (PropertyInfo property in propertyInfo)
             {
                 if (property.CanWrite)
                 {
-                    if (property.PropertyType.IsValueType || property.PropertyType.IsEnum || property.PropertyType == typeof(System.String))
+                    if (property.PropertyType.IsValueType || property.PropertyType.IsEnum || property.PropertyType == typeof(String))
                     {
                         property.SetValue(objTarget, property.GetValue(objSource, null), null);
                     }
