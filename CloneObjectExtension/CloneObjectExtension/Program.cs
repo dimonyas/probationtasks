@@ -6,59 +6,47 @@ using System.Threading.Tasks;
 
 namespace CloneObjectExtension
 {
-    public class TestObjectA
+    public class Parent
     {
-        public static int a;
-        protected const long b = 2;
+        protected const int IntegerConst = 7;
 
-        private string c;
-        public int d;
+        private string _stringField;
+        public int IntegerField;
 
-        private TestObjectB tob;
+        public long LongProperty { get; private set; }
 
-        public TestObjectA()
+        private List<int> _intetgerList;
+        private int[] _integerArray;
+
+        public Child Child;
+
+        public void Initialize()
         {
-            a = 1;
-            d = 4;
-            c = "aba";
-            tob = new TestObjectB();
+            _stringField = "testString";
+            IntegerField = 4;
+            LongProperty = 261;
+            _intetgerList = new List<int> {26, 12, 24};
+            _integerArray = new[] {12, 18, 1};
+            Child = new Child {Parent = this};
         }
 
         public override string ToString()
         {
-            return string.Format("a={0} b={1} c={2} d={3} tob: {4}", a, b, c, d, tob);
+            return string.Format("IntegerConst={0} _stringField={1} IntegerField={2} LongProperty={3}", IntegerConst, _stringField, IntegerField, LongProperty);
         }
     }
 
-    public class TestObjectB
+    public class Child
     {
-        public static int e;
-        protected const long f = 6;
-
-        private string g;
-        public int h;
-        private long[] mas;
-
-        public TestObjectB()
-        {
-            e = 5;
-            g = "caba";
-            h = 8;
-            mas = new[] {9L, 10};
-        }
-
-        public override string ToString()
-        {
-            return string.Format("e={0} f={1} g={2} h={3}", e, f, g, h);
-        }
+        public Parent Parent { get; set; }
     }
-
 
     class Program
     {
         static void Main(string[] args)
         {
-            TestObjectA testObject = new TestObjectA();
+            Parent testObject = new Parent();
+            testObject.Initialize();
             object clonedTestObject = testObject.Clone();
             Console.WriteLine(testObject);
             Console.WriteLine(clonedTestObject);
