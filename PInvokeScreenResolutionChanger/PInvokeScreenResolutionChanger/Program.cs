@@ -83,7 +83,6 @@ namespace PInvokeScreenResolutionChanger
                     ? "Screen resolution is changed succesfully"
                     : "Something went wrong");
                 Thread.Sleep(5000);
-                dm.dmDisplayOrientation = 0;
                 RestoreDefaultResolution(ref dm);
             }
         }
