@@ -8,9 +8,9 @@ namespace CloneObjectExtension
 {
     public static class CloneExtension
     {
-        public static object Clone(this object objSource)
+        public static T Clone<T>(this T objSource)
         {
-            return DoCopy(objSource, new Dictionary<object, object>());
+            return (T) DoCopy(objSource, new Dictionary<object, object>());
         }
 
         private static object DoCopy(object objSource, Dictionary<object, object> circularDictionary)
@@ -27,8 +27,7 @@ namespace CloneObjectExtension
             {
                 if (circularDictionary.ContainsKey(objSource))
                     return circularDictionary[objSource];
-                Type elementType = Type.GetType(
-                    type.FullName.Replace("[]", string.Empty));
+                Type elementType = type.GetElementType();
                 var array = objSource as Array;
                 Array copiedArray = Array.CreateInstance(elementType, array.Length);
                 circularDictionary.Add(objSource, copiedArray);

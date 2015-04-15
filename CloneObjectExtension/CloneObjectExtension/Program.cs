@@ -47,7 +47,7 @@ namespace CloneObjectExtension
         {
             Parent testObject = new Parent();
             testObject.Initialize();
-            object clonedTestObject = testObject.Clone();
+            Parent clonedTestObject = testObject.Clone();
             Console.WriteLine(testObject);
             Console.WriteLine(clonedTestObject);
         }
